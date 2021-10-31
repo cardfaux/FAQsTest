@@ -2,7 +2,7 @@ import { Heading, Page, Card, Layout } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { PlusMinor } from "@shopify/polaris-icons";
 
-const Index = (props) => {
+const SettingsPage = (props) => {
   console.log(props);
   return (
     <Page
@@ -14,8 +14,8 @@ const Index = (props) => {
         hasNext: true,
       }}
     >
-      <TitleBar title="Homepage" />
-      <Heading>Shopify app with Node and React 🎉</Heading>
+      <TitleBar title="Settings Page" />
+      <Heading>Shopify app with Node and React Settings Page 🎉</Heading>
       <Layout>
         <Layout.Section>
           <Card title="Order details" sectioned>
@@ -31,5 +31,4 @@ const Index = (props) => {
     </Page>
   );
 };
-
-export default Index;
+export default SettingsPage;
