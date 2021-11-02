@@ -7,10 +7,13 @@ import {
   TextField,
   FormLayout,
   Button,
+  Select,
+  CalloutCard,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
+import QAList from "../../../components/QAList";
 
-const QACreate = (props) => {
+const FAQEdit = (props) => {
   const [newsletter, setNewsletter] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -30,30 +33,43 @@ const QACreate = (props) => {
 
   const handleChange = useCallback((newValue) => setValue(newValue), []);
 
+  const [selected, setSelected] = useState("draft");
+
+  const handleSelectChange = useCallback((value) => setSelected(value), []);
+
+  const options = [
+    { label: "Active", value: "active" },
+    { label: "Draft", value: "draft" },
+  ];
+
   return (
     <Page
       breadcrumbs={[{ content: "Back", url: "/" }]}
-      title="Create New Question and Answer"
-      primaryAction={{ content: "Save", disabled: true }}
+      title="Edit FAQ"
+      primaryAction={{ content: "Next", disabled: false }}
     >
-      <TitleBar title="Create Question & Answer" />
+      <TitleBar title="Edit FAQ" />
       {/* <Heading>Shopify app with Node and React 🎉</Heading> */}
       <Layout>
+        <Layout.Section></Layout.Section>
+      </Layout>
+
+      <Layout>
         <Layout.Section>
-          <Card sectioned>
+          <Card title="FAQ INFO" sectioned>
             <Form onSubmit={handleSubmit}>
               <FormLayout>
                 <TextField
                   value={email}
                   onChange={handleEmailChange}
-                  label="Question"
+                  label="Title"
                   type="email"
                   autoComplete="email"
-                  helpText={<span>Put your question here</span>}
+                  helpText={<span>Put your FAQ Title Here</span>}
                 />
 
                 <TextField
-                  label="Answer"
+                  label="Description"
                   value={value}
                   onChange={handleChange}
                   multiline={4}
@@ -64,10 +80,20 @@ const QACreate = (props) => {
               </FormLayout>
             </Form>
           </Card>
+          <QAList />
+        </Layout.Section>
+        <Layout.Section secondary>
+          <Card title="Status" sectioned>
+            <Select
+              options={options}
+              onChange={handleSelectChange}
+              value={selected}
+            />
+          </Card>
         </Layout.Section>
       </Layout>
     </Page>
   );
 };
 
-export default QACreate;
+export default FAQEdit;

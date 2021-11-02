@@ -10,7 +10,7 @@ import {
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 
-const EditIndex = (props) => {
+const FAQCreate = (props) => {
   const [newsletter, setNewsletter] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -33,10 +33,10 @@ const EditIndex = (props) => {
   return (
     <Page
       breadcrumbs={[{ content: "Back", url: "/" }]}
-      title="Edit Question and Answer"
-      primaryAction={{ content: "Save", disabled: true }}
+      title="Create FAQ"
+      primaryAction={{ content: "Next", disabled: true }}
     >
-      <TitleBar title="Create Question & Answer" />
+      <TitleBar title="Create FAQ" />
       {/* <Heading>Shopify app with Node and React 🎉</Heading> */}
       <Layout>
         <Layout.Section>
@@ -46,14 +46,14 @@ const EditIndex = (props) => {
                 <TextField
                   value={email}
                   onChange={handleEmailChange}
-                  label="Question"
+                  label="Title"
                   type="email"
                   autoComplete="email"
                   helpText={<span>Put your question here</span>}
                 />
 
                 <TextField
-                  label="Answer"
+                  label="Description"
                   value={value}
                   onChange={handleChange}
                   multiline={4}
@@ -70,4 +70,4 @@ const EditIndex = (props) => {
   );
 };
 
-export default EditIndex;
+export default FAQCreate;

@@ -10,7 +10,7 @@ import {
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 
-const QACreate = (props) => {
+const QAEdit = (props) => {
   const [newsletter, setNewsletter] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -33,7 +33,7 @@ const QACreate = (props) => {
   return (
     <Page
       breadcrumbs={[{ content: "Back", url: "/" }]}
-      title="Create New Question and Answer"
+      title="Edit Question and Answer"
       primaryAction={{ content: "Save", disabled: true }}
     >
       <TitleBar title="Create Question & Answer" />
@@ -70,4 +70,4 @@ const QACreate = (props) => {
   );
 };
 
-export default QACreate;
+export default QAEdit;
