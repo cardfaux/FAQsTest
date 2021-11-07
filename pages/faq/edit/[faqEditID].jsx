@@ -8,10 +8,9 @@ import {
   FormLayout,
   Button,
   Select,
-  CalloutCard,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
-import QAList from "../../../components/QAList";
+import QAListSection from "../../../components/QAListSection";
 
 const FAQEdit = (props) => {
   const [newsletter, setNewsletter] = useState(false);
@@ -80,7 +79,7 @@ const FAQEdit = (props) => {
               </FormLayout>
             </Form>
           </Card>
-          <QAList />
+          <QAListSection />
         </Layout.Section>
         <Layout.Section secondary>
           <Card title="Status" sectioned>
