@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  store      String   @unique(map: "User_store_key")
+  scope      String
+  plan       Plan?    @relation(fields: [plan_id], references: [id])
+  plan_id    Int?
+  faqs       FAQ[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([store])
+}
+
+model Plan {
+  id         Int      @id @default(autoincrement())
+  title      String
+  slug       String   @unique(map: "Plan_slug_key")
+  users      User[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([slug, id])
+}
+
+model FAQ {
+  id         Int        @id @default(autoincrement())
+  title      String
+  slug       String     @unique(map: "FAQ_slug_key")
+  dynamic    Boolean    @default(false)
+  user       User       @relation(fields: [user_id], references: [id])
+  user_id    Int
+  questions  Question[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+
+  @@index([slug, id])
+}
+
+model Question {
+  id         Int      @id @default(autoincrement())
+  title      String
+  dynamic    Boolean  @default(false)
+  faq        FAQ      @relation(fields: [faq_id], references: [id])
+  faq_id     Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([id])
+}
+
+// model Post {
+//   id        Int      @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   content   String?
+//   published Boolean  @default(false)
+//   author    User     @relation(fields: [authorId], references: [id])
+//   authorId  Int
+// }
+
+// model Profile {
+//   id     Int     @id @default(autoincrement())
+//   bio    String?
+//   user   User    @relation(fields: [userId], references: [id])
+//   userId Int     @unique
+// }
