@@ -35,15 +35,16 @@ model Plan {
 }
 
 model FAQ {
-  id         Int        @id @default(autoincrement())
-  title      String
-  slug       String     @unique(map: "FAQ_slug_key")
-  dynamic    Boolean    @default(false)
-  user       User       @relation(fields: [user_id], references: [id])
-  user_id    Int
-  questions  Question[]
-  created_at DateTime   @default(now())
-  updated_at DateTime   @updatedAt
+  id          Int        @id @default(autoincrement())
+  title       String
+  slug        String     @unique(map: "FAQ_slug_key")
+  dynamic     Boolean    @default(false)
+  user        User       @relation(fields: [user_id], references: [id])
+  user_id     Int
+  description String
+  question    Question[]
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
 
   @@index([slug, id])
 }
@@ -52,6 +53,7 @@ model Question {
   id         Int      @id @default(autoincrement())
   title      String
   dynamic    Boolean  @default(false)
+  answer     String
   faq        FAQ      @relation(fields: [faq_id], references: [id])
   faq_id     Int
   created_at DateTime @default(now())
