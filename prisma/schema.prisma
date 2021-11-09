@@ -10,51 +10,51 @@ datasource db {
   url      = env("DATABASE")
 }
 
-model User {
+model user {
   id         Int      @id @default(autoincrement())
   store      String   @unique(map: "User_store_key")
   scope      String
-  plan       Plan?    @relation(fields: [plan_id], references: [id])
+  plan       plan?    @relation(fields: [plan_id], references: [id])
   plan_id    Int?
-  faqs       FAQ[]
+  faqs       faq[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@index([store])
 }
 
-model Plan {
+model plan {
   id         Int      @id @default(autoincrement())
   title      String
   slug       String   @unique(map: "Plan_slug_key")
-  users      User[]
+  users      user[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@index([slug, id])
 }
 
-model FAQ {
+model faq {
   id          Int        @id @default(autoincrement())
   title       String
   slug        String     @unique(map: "FAQ_slug_key")
   dynamic     Boolean    @default(false)
-  user        User       @relation(fields: [user_id], references: [id])
+  user        user       @relation(fields: [user_id], references: [id])
   user_id     Int
   description String
-  question    Question[]
+  question    question[]
   created_at  DateTime   @default(now())
   updated_at  DateTime   @updatedAt
 
   @@index([slug, id])
 }
 
-model Question {
+model question {
   id         Int      @id @default(autoincrement())
   title      String
   dynamic    Boolean  @default(false)
   answer     String
-  faq        FAQ      @relation(fields: [faq_id], references: [id])
+  faq        faq      @relation(fields: [faq_id], references: [id])
   faq_id     Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

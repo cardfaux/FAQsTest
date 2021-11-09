@@ -8,7 +8,7 @@ import next from "next";
 import Router from "koa-router";
 import { PrismaClient } from "@prisma/client";
 
-const { user, fAQ } = new PrismaClient();
+const { user, faq } = new PrismaClient();
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -124,7 +124,7 @@ app.prepare().then(async () => {
 
       console.log(user_id.id);
 
-      const newFaq = await fAQ.create({
+      const newFaq = await faq.create({
         data: {
           title: "FAQ About Page Test",
           slug: "faq-about-page-test",
