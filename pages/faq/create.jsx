@@ -24,11 +24,24 @@ const FAQCreate = (props) => {
     []
   );
 
-  const handleEmailChange = useCallback((value) => setEmail(value), []);
+  const [titleValue, setTitleValue] = useState("");
+  const handleTitleChange = (value) => setTitleValue(value);
 
-  const [value, setValue] = useState("");
+  const [descriptionValue, setDescriptionValue] = useState("");
+  const handleDescriptionChange = (value) => setDescriptionValue(value);
 
   const handleChange = useCallback((newValue) => setValue(newValue), []);
+
+  const clickedBtn = () => {
+    console.log("clickedBtn");
+    props.authAxios
+      .post("/faq", {
+        title: "testing title from client",
+        description: "test description from client",
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Page
@@ -45,22 +58,22 @@ const FAQCreate = (props) => {
               <FormLayout>
                 <TextField
                   value={email}
-                  onChange={handleEmailChange}
+                  onChange={handleTitleChange}
                   label="Title"
-                  type="email"
-                  autoComplete="email"
+                  type="text"
+                  value={titleValue}
                   helpText={<span>Put your question here</span>}
                 />
 
                 <TextField
                   label="Description"
-                  value={value}
-                  onChange={handleChange}
+                  value={descriptionValue}
+                  onChange={handleDescriptionChange}
                   multiline={4}
                   autoComplete="off"
                 />
 
-                <Button submit>Submit</Button>
+                <Button onClick={clickedBtn}>Submit</Button>
               </FormLayout>
             </Form>
           </Card>
